@@ -6,7 +6,7 @@ namespace dje\components;
  *
  * @package dje\components
  */
-class HelpfulFunctionsComponent extends \yii\base\Component
+class HelpfulFunctions extends \yii\base\Component
 {
     /**
      * @source https://stackoverflow.com/questions/7696548/php-how-to-remove-empty-entries-of-an-array-recursively
