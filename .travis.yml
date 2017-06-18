@@ -1,0 +1,46 @@
+language: php
+
+php:
+  - 7.0
+
+# faster builds on new travis setup not using sudo
+sudo: false
+
+services:
+  - mysql
+
+# cache vendor dirs
+cache:
+  directories:
+    - $HOME/.composer/cache
+
+install:
+  - travis_retry git clone https://github.com/davidjeddy/zeroforksgiven.git ./
+  - travis_retry composer self-update && composer --version
+  - travis_retry composer global require "fxp/composer-asset-plugin:~1.1.0"
+  - export PATH="$HOME/.composer/vendor/bin:$PATH"
+  - travis_retry composer install --dev --prefer-dist --no-interaction
+# setup application:
+  - |
+    cp .env.dist .env
+    cp vhost.conf.dist vhost.conf
+    sed -i s/yii2-starter-kit\.dev/localhost:8080/ .env
+
+  - |
+    cd tests/codeception/backend && codecept build
+    cd ../common && codecept build
+    cd ../console && codecept build
+    cd ../frontend && codecept build
+    cd ../backend && codecept build
+    cd ../../../
+
+before_script:
+  - mysql -e 'CREATE DATABASE `zfg`;';
+  - php tests/codeception/bin/yii app/setup --interactive=0
+  - php console/yii --migrate/up migrationPath=./vendor/davidjeddy/yii2-resutoran/src/migrations/ --interactive=0
+  - php composer.phar require davidjeddy/yii2-resutoran -vvv -o
+script:
+  - |
+    php -S localhost:8080 > /dev/null 2>&1 &
+    cd tests
+    ./../vendor/bin/codecept run --debug
