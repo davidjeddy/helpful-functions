@@ -9,3 +9,4 @@ Classes I have found helpfuly to have around when working with Yii2.
 # Namespace - Usage
 
     \dje\components\HelpfulFunctions - Helpful static functions
+

@@ -4,9 +4,9 @@ declare(strict_types=1);
 namespace dje\components;
 
 /**
- * Class Resutoran
+ * Class HelpfulFunctions
  *
- * @package dje\components
+ * @package davidjeddy/yii2-helpful-classes
  */
 class HelpfulFunctions extends \yii\base\Component
 {

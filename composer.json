@@ -1,10 +1,8 @@
 {
-  "name": "davidjeddy/yii2-helpful-classes",
-  "description": "Helpful Yii2 Classes",
-  "keywords": [
-    "yii2"
-  ],
-  "homepage": "https://github.com/davidjeddy/yii2-helpful-classes#readme",
+  "name": "davidjeddy/helpful-functions",
+  "description": "Helpful Functions",
+  "keywords": [],
+  "homepage": "https://github.com/davidjeddy/helpful-functions#readme",
   "type": "library",
   "license": "MIT",
   "authors": [
@@ -16,8 +14,8 @@
     }
   ],
   "support": {
-    "issues": "https://github.com/davidjeddy/yii2-helpful-classes/issues",
-    "source": "https://github.com/davidjeddy/yii2-helpful-classes"
+    "issues": "https://github.com/davidjeddy/helpful-functions/issues",
+    "source": "https://github.com/davidjeddy/helpful-functions"
   },
   "require": {
     "php": ">=7.0",
