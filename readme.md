@@ -1,6 +1,6 @@
 # Read Me
 
-Classes I have found helpfuly to have around when working with Yii2.
+Functions / methods I find helpful to have around for variouse projects.
 
 # Install
 
