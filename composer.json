@@ -23,7 +23,7 @@
   "require-dev": {
     "codeception/codeception":  "^2.0",
     "codeception/specify":      "^0.4.3",
-    "codeception/verify":       "^0.3.0",
+    "codeception/verify":       "^0.3.0"
   },
   "autoload": {
     "psr-4": {
