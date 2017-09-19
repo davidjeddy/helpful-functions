@@ -93,22 +93,37 @@ class HelpfulFunctions extends \yii\base\Component
     /**
      * @param string $url
      * @param string $target
-     * @return bool
+     * @return string
+     * @throws \Exception
      */
-    public static function curlGET(string $url, string $target): bool
+    public static function curlGET(string $url, string $target = ''): string
     {
-        $ch = curl_init($url);
-        $fp = fopen($target, 'wb');
-        curl_setopt($ch, CURLOPT_FILE, $fp);
-        curl_setopt($ch, CURLOPT_HEADER, 0);
-        curl_exec($ch);
-        curl_close($ch);
-        $response = fclose($fp);
+        $returnData = null;
 
-        if ($response !== true) {
-            throw new \Error(curl_errno($ch));
+        try {
+            // exec basic curl request
+            $curl = curl_init($url);
+            curl_setopt($curl, CURLOPT_URL, $url);
+            curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($curl, CURLOPT_HEADER, false);
+
+            if ($target !== '') {
+                curl_setopt($curl, CURLOPT_FILE, $fp);
+            }
+
+            $returnData = curl_exec($curl);
+            curl_close($curl);
+
+            // save to file if provided
+            if ($target !== '') {
+                $fp = fopen($target, 'wb');
+                fclose($fp);
+            }
+
+        } catch (\Exception $e) {
+            throw new \Exception($e->getMessage());
         }
 
-        return $response;
+        return $returnData;
     }
 }
