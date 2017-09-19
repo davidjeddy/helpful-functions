@@ -8,7 +8,7 @@
 
 OR add to `composer.json`
 
-    "davidjeddy/helpful-functions": "dev-master@1.0"
+    "davidjeddy/helpful-functions": "dev-master@dev"
 
 ...then run composer install
 
