@@ -101,6 +101,12 @@ class HelpfulFunctions extends \yii\base\Component
         $returnData = null;
 
         try {
+            $fp = null;
+            // save to file if provided
+            if ($target !== '') {
+                $fp = fopen($target, 'wb');
+            }
+
             // exec basic curl request
             $curl = curl_init($url);
             curl_setopt($curl, CURLOPT_URL, $url);
@@ -116,7 +122,6 @@ class HelpfulFunctions extends \yii\base\Component
 
             // save to file if provided
             if ($target !== '') {
-                $fp = fopen($target, 'wb');
                 fclose($fp);
             }
 
