@@ -93,12 +93,12 @@ class HelpfulFunctions extends \yii\base\Component
     /**
      * @param string $url
      * @param string $target
-     * @return string
+     * @return bool
      * @throws \Exception
      */
-    public static function curlGET(string $url, string $target = ''): string
+    public static function curlGET(string $url, string $target = ''): bool
     {
-        $returnData = null;
+        $returnData = false;
 
         try {
             $fp = null;
@@ -117,7 +117,7 @@ class HelpfulFunctions extends \yii\base\Component
                 curl_setopt($curl, CURLOPT_FILE, $fp);
             }
 
-            $returnData = curl_exec($curl);
+            $returnData = (bool)curl_exec($curl);
             curl_close($curl);
 
             // save to file if provided
@@ -130,5 +130,25 @@ class HelpfulFunctions extends \yii\base\Component
         }
 
         return $returnData;
+    }
+
+    /**
+     * @param string $url
+     * @return string
+     * @throws \Exception
+     */
+    public static function curlGETJson(string $url): string
+    {
+        try {
+
+            $curl = curl_init($url);
+            curl_setopt($curl, CURLOPT_URL, $url);
+            curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($curl, CURLOPT_HEADER, false);
+            return curl_exec($curl);
+
+        } catch (\Exception $e) {
+            throw new \Exception($e->getMessage());
+        }
     }
 }
